@@ -1,11 +1,12 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Room {
     private int number;
     private int beds;
     private boolean isAvailable;
-    private ArrayList<Reservation> reservations;
+    private List<Reservation> reservations;
 
     Room(int number, int beds) throws Exception {
         setNumber(number);
@@ -41,6 +42,15 @@ public class Room {
     public boolean isAvailableOnDate(LocalDate date) {
         for (Reservation res : reservations) {
             if (res.isOverlapping(date, date)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isAvailableOnDate(LocalDate dateFrom, LocalDate dateTo) {
+        for (Reservation res : reservations) {
+            if (res.isOverlapping(dateFrom, dateTo)) {
                 return false;
             }
         }
