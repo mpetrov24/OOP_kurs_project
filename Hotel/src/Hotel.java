@@ -1,7 +1,9 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Hotel {
-    private ArrayList<Room> rooms;
+    private static List<Room> rooms;
 
     Hotel() {
         this.rooms = new ArrayList<>();
@@ -15,5 +17,30 @@ public class Hotel {
             }
         }
         rooms.add(room);
+    }
+
+    public static Room findRoom(int roomNumber) {
+        Room room = null;
+        for (Room r: rooms) {
+            if (r.getNumber() == roomNumber) {
+                room = r;
+                break;
+            }
+        }
+        return room;
+    }
+
+    public void checkin(int roomNumber, LocalDate from, LocalDate to, String note) {
+        Room room = Hotel.findRoom(roomNumber);
+        if (room != null) {
+            if (room.isAvailableOnDate(from, to)) {
+                Reservation reservation = new Reservation(roomNumber, from, to, note);
+                room.addReservation(reservation);
+            } else {
+                System.out.println("Room is not available.");
+            }
+        } else {
+            System.out.println("There is no such room.");
+        }
     }
 }
