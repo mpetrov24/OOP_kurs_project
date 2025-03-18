@@ -6,7 +6,7 @@ public class Hotel {
     private static List<Room> rooms;
 
     Hotel() {
-        this.rooms = new ArrayList<>();
+        rooms = new ArrayList<>();
     }
 
     public void addRoom(Room room) {
@@ -34,7 +34,7 @@ public class Hotel {
         Room room = Hotel.findRoom(roomNumber);
         if (room != null) {
             if (room.isAvailableOnDate(from, to)) {
-                Reservation reservation = new Reservation(roomNumber, from, to, note);
+                Reservation reservation = new Reservation(roomNumber, from, to, note, room.getBeds());
                 room.addReservation(reservation);
             } else {
                 System.out.println("Room is not available.");
