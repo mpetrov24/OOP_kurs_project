@@ -30,12 +30,13 @@ public class Hotel {
         return room;
     }
 
-    public void checkin(int roomNumber, LocalDate from, LocalDate to, String note) {
+    public void checkin(int roomNumber, LocalDate from, LocalDate to, String note, int guests) {
         Room room = Hotel.findRoom(roomNumber);
         if (room != null) {
             if (room.isAvailableOnDate(from, to)) {
-                Reservation reservation = new Reservation(roomNumber, from, to, note, room.getBeds());
+                Reservation reservation = new Reservation(roomNumber, from, to, note, guests);
                 room.addReservation(reservation);
+                System.out.println("Reservation successful");
             } else {
                 System.out.println("Room is not available.");
             }
