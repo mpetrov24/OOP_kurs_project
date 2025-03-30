@@ -29,28 +29,40 @@ public class Main {
             switch(command) {
                 case "checkin":
                     int guests = -1;
-                    int roomNumber = 0;
-                    LocalDate from = null;
-                    LocalDate to = null;
+                    int roomNumber;
+                    LocalDate from;
+                    LocalDate to;
                     try {
                         roomNumber = Integer.parseInt(tokens[1]);
                         from = LocalDate.parse(tokens[2], formatter);
                         to = LocalDate.parse(tokens[3], formatter);
+
+                        if (tokens.length < 5) {
+                            System.out.println("Too few arguments");
+                            break;
+                        }
 
                         if (to.isBefore(from)) {
                             System.out.println("Check-out date cannot be before check-in date.");
                             break;
                         }
 
+                        if (from.isBefore(LocalDate.now())) {
+                            System.out.println("Check-in date cannot be before current date");
+                            break;
+                        }
+
                     } catch (NumberFormatException e) {
                         System.out.println("Room number and guests need to be a valid number");
+                        break;
                     } catch (DateTimeException e) {
                         System.out.println("Invalid date");
+                        break;
                     }
 
                     try {
                         guests = Integer.parseInt(tokens[tokens.length - 1]);
-                    } catch (NumberFormatException _) {
+                    } catch (NumberFormatException ignored) {
 
                     }
 
@@ -65,9 +77,34 @@ public class Main {
 
                     break;
 
+                case "availability":
+                    LocalDate date;
+                    if (tokens.length == 1) {
+                        date = LocalDate.now();
+                    } else {
+                        date = dateValidator(tokens[1], formatter);
+                    }
+
+                    if (date == null) {
+                        break;
+                    }
+                    hotel.availability(date);
+                    break;
+
                 case "exit":
                     return;
             }
         }
+    }
+
+    public static LocalDate dateValidator(String dateStr, DateTimeFormatter formatter) {
+        LocalDate date;
+        try {
+            date = LocalDate.parse(dateStr, formatter);
+        } catch (DateTimeException e) {
+            System.out.println("Invalid date");
+            return null;
+        }
+        return date;
     }
 }

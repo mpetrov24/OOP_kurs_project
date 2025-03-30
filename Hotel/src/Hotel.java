@@ -44,4 +44,18 @@ public class Hotel {
             System.out.println("There is no such room.");
         }
     }
+
+    public void availability(LocalDate date) {
+        boolean areAvailable = false;
+        for (Room room : rooms) {
+            if (room.isAvailableOnDate(date)) {
+                areAvailable = true;
+                System.out.printf("Room: %s, Beds: %d\n", room.getNumber(), room.getBeds());
+            }
+        }
+
+        if (!areAvailable) {
+            System.out.printf("There no available rooms on %s", date);
+        }
+    }
 }
