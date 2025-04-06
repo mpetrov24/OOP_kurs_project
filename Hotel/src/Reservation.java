@@ -15,6 +15,14 @@ public class Reservation {
         this.guests = guests;
     }
 
+    public LocalDate getFrom() {
+        return from;
+    }
+
+    public LocalDate getTo() {
+        return to;
+    }
+
     public boolean isOverlapping(LocalDate checkFrom, LocalDate checkTo) {
         return !(checkTo.isBefore(from) || checkFrom.isAfter(to));
     }

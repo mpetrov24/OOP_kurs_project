@@ -27,15 +27,19 @@ public class Main {
             String command = tokens[0];
 
             switch(command) {
-                case "checkin":
+                case "checkin": {
                     int guests = -1;
                     int roomNumber;
                     LocalDate from;
                     LocalDate to;
                     try {
                         roomNumber = Integer.parseInt(tokens[1]);
-                        from = LocalDate.parse(tokens[2], formatter);
-                        to = LocalDate.parse(tokens[3], formatter);
+                        from = dateValidator(tokens[2], formatter);
+                        to = dateValidator(tokens[3], formatter);
+
+                        if (from == null || to == null) {
+                            break;
+                        }
 
                         if (tokens.length < 5) {
                             System.out.println("Too few arguments");
@@ -55,9 +59,6 @@ public class Main {
                     } catch (NumberFormatException e) {
                         System.out.println("Room number and guests need to be a valid number");
                         break;
-                    } catch (DateTimeException e) {
-                        System.out.println("Invalid date");
-                        break;
                     }
 
                     try {
@@ -76,8 +77,9 @@ public class Main {
                     hotel.checkin(roomNumber, from, to, note, guests);
 
                     break;
+                }
 
-                case "availability":
+                case "availability": {
                     LocalDate date;
                     if (tokens.length == 1) {
                         date = LocalDate.now();
@@ -90,6 +92,21 @@ public class Main {
                     }
                     hotel.availability(date);
                     break;
+                }
+
+                case "checkout": {
+                    if (tokens.length > 2) {
+                        System.out.println("Too many arguments!");
+                        break;
+                    }
+                    try {
+                        int roomNumber = Integer.parseInt(tokens[1]);
+                        hotel.checkout(roomNumber);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid room number");
+                    }
+                    break;
+                }
 
                 case "exit":
                     return;

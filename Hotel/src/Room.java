@@ -1,17 +1,16 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Room {
     private int number;
     private int beds;
-    private boolean isAvailable;
     private List<Reservation> reservations;
 
     Room(int number, int beds) throws Exception {
         setNumber(number);
         setBeds(beds);
-        this.isAvailable = true;
         this.reservations = new ArrayList<>();
     }
 
@@ -57,13 +56,22 @@ public class Room {
         return true;
     }
 
-    public void addReservation(Reservation res) {
-        reservations.add(res);
-        this.isAvailable = false;
+    public boolean checkout() {
+        LocalDate today = LocalDate.now();
+
+        Iterator<Reservation> iterator = reservations.iterator();
+        while (iterator.hasNext()) {
+            Reservation reservation = iterator.next();
+            if (!today.isBefore(reservation.getFrom()) && !today.isAfter(reservation.getTo())) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void removeReservation(Reservation res) {
-        reservations.remove(res);
-        this.isAvailable = true;
+    public void addReservation(Reservation res) {
+        reservations.add(res);
     }
+
 }

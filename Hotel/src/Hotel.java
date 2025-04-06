@@ -50,12 +50,26 @@ public class Hotel {
         for (Room room : rooms) {
             if (room.isAvailableOnDate(date)) {
                 areAvailable = true;
-                System.out.printf("Room: %s, Beds: %d\n", room.getNumber(), room.getBeds());
+                System.out.printf("Room: %d, Beds: %d\n", room.getNumber(), room.getBeds());
             }
         }
 
         if (!areAvailable) {
             System.out.printf("There no available rooms on %s", date);
+        }
+    }
+
+    public void checkout(int roomNumber) {
+        Room room = Hotel.findRoom(roomNumber);
+        if (room != null) {
+            boolean success = room.checkout();
+            if (success) {
+                System.out.printf("Room %d is now available\n",roomNumber);
+            } else {
+                System.out.println("No reservations found");
+            }
+        } else {
+            System.out.println("No room found");
         }
     }
 }
