@@ -1,3 +1,5 @@
+package hotel;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,7 +10,7 @@ public class Room {
     private int beds;
     private List<Reservation> reservations;
 
-    Room(int number, int beds) throws Exception {
+    public Room(int number, int beds) throws Exception {
         setNumber(number);
         setBeds(beds);
         this.reservations = new ArrayList<>();
