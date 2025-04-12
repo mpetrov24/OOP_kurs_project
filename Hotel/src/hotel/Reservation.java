@@ -17,12 +17,24 @@ public class Reservation {
         this.guests = guests;
     }
 
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
     public LocalDate getFrom() {
         return from;
     }
 
     public LocalDate getTo() {
         return to;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public int getGuests() {
+        return guests;
     }
 
     public boolean isOverlapping(LocalDate checkFrom, LocalDate checkTo) {

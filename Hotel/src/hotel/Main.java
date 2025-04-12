@@ -24,6 +24,6 @@ public class Main {
             String input = sc.nextLine();
             if (input.equalsIgnoreCase("exit")) break;
             registry.executeCommand(input, hotel);
-            }
         }
     }
+}

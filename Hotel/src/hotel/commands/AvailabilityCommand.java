@@ -20,7 +20,7 @@ public class AvailabilityCommand extends Command{
         for (Room room : hotel.getRooms()) {
             if (room.isAvailableOnDate(date)) {
                 areAvailable = true;
-                System.out.printf("hotel.Room: %d, Beds: %d\n", room.getNumber(), room.getBeds());
+                System.out.printf("Room: %d, Beds: %d\n", room.getNumber(), room.getBeds());
             }
         }
 

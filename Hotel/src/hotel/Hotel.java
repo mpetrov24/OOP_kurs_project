@@ -1,6 +1,7 @@
 package hotel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Hotel {
@@ -11,13 +12,13 @@ public class Hotel {
     }
 
     public List<Room> getRooms() {
-        return new ArrayList<>(rooms);
+        return Collections.unmodifiableList(rooms);
     }
 
     public void addRoom(Room room) {
         for (Room r : rooms) {
             if (r.getNumber() == room.getNumber()) {
-                System.out.println("hotel.Room with this number already exists");
+                System.out.println("Room with this number already exists");
                 return;
             }
         }

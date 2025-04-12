@@ -13,6 +13,7 @@ public class CommandRegistry {
         register("checkin", new CheckinCommand());
         register("availability", new AvailabilityCommand());
         register("checkout", new CheckoutCommand());
+        register("unavailable", new UnavailableCommand());
     }
 
     public void register(String name, Command command) {
