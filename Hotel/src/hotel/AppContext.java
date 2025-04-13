@@ -3,7 +3,7 @@ package hotel;
 import java.io.File;
 
 public class AppContext {
-    private Hotel hotel;
+    private final Hotel hotel;
     private File reservationFile;
     private File unavailableFile;
 

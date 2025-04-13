@@ -7,14 +7,14 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Room {
-    private int number;
-    private int beds;
-    private List<Reservation> reservations;
-    private List<UnavailablePeriod> unavailablePeriods;
+    private final int number;
+    private final int beds;
+    private final List<Reservation> reservations;
+    private final List<UnavailablePeriod> unavailablePeriods;
 
-    public Room(int number, int beds) throws Exception {
-        setNumber(number);
-        setBeds(beds);
+    public Room(int number, int beds) {
+        this.number = number;
+        this.beds = beds;
         this.reservations = new ArrayList<>();
         this.unavailablePeriods = new ArrayList<>();
     }
@@ -33,23 +33,6 @@ public class Room {
 
     public List<UnavailablePeriod> getUnavailablePeriods() {
         return Collections.unmodifiableList(unavailablePeriods);
-    }
-
-    public void setNumber(int number) throws Exception {
-        if (number > 0) {
-            this.number = number;
-            return;
-        }
-        throw new Exception("Invalid room number");
-    }
-
-
-    public void setBeds(int beds) throws Exception {
-        if (beds > 0) {
-            this.beds = beds;
-            return;
-        }
-        throw new Exception("Invalid number of beds");
     }
 
     public boolean isAvailableOnDate(LocalDate date) {
@@ -88,7 +71,7 @@ public class Room {
         Iterator<Reservation> iterator = reservations.iterator();
         while (iterator.hasNext()) {
             Reservation reservation = iterator.next();
-            if (!today.isBefore(reservation.getFrom()) && !today.isAfter(reservation.getTo())) {
+            if (!today.isBefore(reservation.from()) && !today.isAfter(reservation.to())) {
                 iterator.remove();
                 return true;
             }
@@ -102,6 +85,14 @@ public class Room {
 
     public void addUnavailablePeriod(UnavailablePeriod period) {
         unavailablePeriods.add(period);
+    }
+
+    public void clearReservations() {
+        reservations.clear();
+    }
+
+    public void clearUnavailable() {
+        unavailablePeriods.clear();
     }
 
 }

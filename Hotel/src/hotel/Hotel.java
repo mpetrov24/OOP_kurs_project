@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Hotel {
-    private static List<Room> rooms;
+    private final List<Room> rooms;
 
     public Hotel() {
         rooms = new ArrayList<>();
@@ -25,7 +25,7 @@ public class Hotel {
         rooms.add(room);
     }
 
-    public static Room findRoom(int roomNumber) {
+    public Room findRoom(int roomNumber) {
         Room room = null;
         for (Room r: rooms) {
             if (r.getNumber() == roomNumber) {
@@ -34,5 +34,17 @@ public class Hotel {
             }
         }
         return room;
+    }
+
+    public void clearReservations() {
+        for (Room r : rooms) {
+            r.clearReservations();
+        }
+    }
+
+    public void clearUnavailable() {
+        for (Room r : rooms) {
+            r.clearUnavailable();
+        }
     }
 }

@@ -16,10 +16,10 @@ public class HotelSaver {
                 for (Reservation r : room.getReservations()) {
                     writer.write(String.format("%d,%s,%s,%s,%d",
                             room.getNumber(),
-                            r.getFrom(),
-                            r.getTo(),
-                            r.getNote(),
-                            r.getGuests()));
+                            r.from(),
+                            r.to(),
+                            r.note(),
+                            r.guests()));
                     writer.newLine();
                 }
             }
@@ -32,9 +32,9 @@ public class HotelSaver {
                 for (UnavailablePeriod u : room.getUnavailablePeriods()) {
                     writer.write(String.format("%d,%s,%s,%s",
                             room.getNumber(),
-                            u.getFrom(),
-                            u.getTo(),
-                            u.getNote()));
+                            u.from(),
+                            u.to(),
+                            u.note()));
                     writer.newLine();
                 }
             }
