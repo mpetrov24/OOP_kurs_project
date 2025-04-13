@@ -1,12 +1,18 @@
 package hotel.commands;
 
-import hotel.Hotel;
+import hotel.AppContext;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
 public abstract class Command {
-   public abstract void execute(String[] args, Hotel hotel) throws CommandException;
+   protected AppContext context;
+
+   public Command(AppContext context) {
+      this.context = context;
+   }
+
+   public abstract void execute(String[] args) throws CommandException;
 
    protected LocalDate dateParser(String dateStr) throws CommandException {
       LocalDate date;

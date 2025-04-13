@@ -1,5 +1,6 @@
 package hotel.commands;
 
+import hotel.AppContext;
 import hotel.Hotel;
 import hotel.Room;
 import hotel.UnavailablePeriod;
@@ -8,14 +9,19 @@ import java.time.LocalDate;
 import java.util.Arrays;
 
 public class UnavailableCommand extends Command{
-    public void execute(String[] args, Hotel hotel) throws CommandException {
+    public UnavailableCommand(AppContext context) {
+        super(context);
+    }
+
+    public void execute(String[] args) throws CommandException {
+        Hotel hotel = context.getHotel();
         if (args.length < 4) {
             throw new CommandException("Usage: unavailable <room> <from> <to> <note>");
         }
 
         try {
             int roomNumber = Integer.parseInt(args[0]);
-            Room room = Hotel.findRoom(roomNumber);
+            Room room = hotel.findRoom(roomNumber);
             if (room != null) {
                 LocalDate from = dateParser(args[1]);
                 LocalDate to = dateParser(args[2]);

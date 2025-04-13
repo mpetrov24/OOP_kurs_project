@@ -2,16 +2,23 @@ package hotel.commands;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+
+import hotel.AppContext;
 import hotel.Hotel;
 import hotel.Room;
 import hotel.Reservation;
 
 public class CheckinCommand extends Command{
-    public void execute(String[] args, Hotel hotel) throws CommandException {
+    public CheckinCommand(AppContext context) {
+        super(context);
+    }
+
+    public void execute(String[] args) throws CommandException {
         int guests = -1;
         int roomNumber;
         LocalDate from;
         LocalDate to;
+        Hotel hotel = context.getHotel();
 
         if (args.length < 4) {
             throw new CommandException("Usage: checkin <room> <from> <to> <note> [guests]");
@@ -45,7 +52,7 @@ public class CheckinCommand extends Command{
         int noteEndIdx = guests == -1 ? args.length : args.length - 1;
         String note = String.join(" ", Arrays.copyOfRange(args, 3, noteEndIdx));
 
-        Room room = Hotel.findRoom(roomNumber);
+        Room room = hotel.findRoom(roomNumber);
 
         if (room != null) {
             if (guests == -1) {
@@ -53,7 +60,7 @@ public class CheckinCommand extends Command{
             }
 
             if (room.isAvailableOnDate(from, to)) {
-                Reservation reservation = new Reservation(roomNumber, from, to, note, guests);
+                Reservation reservation = new Reservation(from, to, note, guests);
                 room.addReservation(reservation);
                 System.out.println("Reservation successful");
             } else {
