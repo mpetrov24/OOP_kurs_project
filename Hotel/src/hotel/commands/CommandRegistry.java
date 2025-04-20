@@ -13,9 +13,12 @@ public class CommandRegistry {
         register("checkin", new CheckinCommand(context));
         register("availability", new AvailabilityCommand(context));
         register("checkout", new CheckoutCommand(context));
+        register("report", new ReportCommand(context));
         register("unavailable", new UnavailableCommand(context));
         register("open", new OpenCommand(context));
         register("save", new SaveCommand(context));
+        register("saveas", new SaveAsCommand(context));
+        register("help", new HelpCommand(context));
     }
 
     public void register(String name, Command command) {
