@@ -12,19 +12,26 @@ public class HelpCommand extends Command{
             throw new CommandException("Usage: help");
         }
 
-        System.out.println("Available commands:");
-        System.out.println("  open <reservationsFile> <unavailableFile>    - Load reservation and unavailable data from files.");
-        System.out.println("  save                                         - Save the current reservation and unavailable data to the last used files.");
-        System.out.println("  saveas <reservationsFile> <unavailableFile>  - Save data to new files and update the current file references.");
-        System.out.println("  close                                        - Unload current hotel data from memory.");
-        System.out.println("  help                                         - Show this help message.");
-        System.out.println("  exit                                         - Exit the application.");
-        System.out.println("  checkin <room> <from> <to> <note> [guests]   - Check in a guest to a room.");
-        System.out.println("  availability [date]                          - List available rooms for a specific date or today.");
-        System.out.println("  checkout <room>                              - Check out guests from a room.");
-        System.out.println("  report <from> <to>                           - Show usage report of rooms for a date range.");
-        System.out.println("  find <beds> <from> <to>                      - Find a free room with at least the given number of beds.");
-        System.out.println("  find! <beds> <from> <to>                     - Emergency search for room (may suggest moving guests).");
-        System.out.println("  unavailable <room> <from> <to> <note>        - Mark a room as temporarily unavailable.");
+        System.out.println(this);
+    }
+
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Available commands:\n");
+        builder.append("  open <reservationsFile> <unavailableFile>    - Load reservation and unavailable data from files.\n");
+        builder.append("  save                                         - Save the current reservation and unavailable data to the last used files.\n");
+        builder.append("  saveas <reservationsFile> <unavailableFile>  - Save data to new files and update the current file references.\n");
+        builder.append("  close                                        - Unload current hotel data from memory.\n");
+        builder.append("  help                                         - Show this help message.\n");
+        builder.append("  exit                                         - Exit the application.\n");
+        builder.append("  checkin <room> <from> <to> <note> [guests]   - Check in a guest to a room.\n");
+        builder.append("  availability [date]                          - List available rooms for a specific date or today.\n");
+        builder.append("  checkout <room>                              - Check out guests from a room.\n");
+        builder.append("  report <from> <to>                           - Show usage report of rooms for a date range.\n");
+        builder.append("  find <beds> <from> <to>                      - Find a free room with at least the given number of beds.\n");
+        builder.append("  find! <beds> <from> <to>                     - Emergency search for room (may suggest moving guests).\n");
+        builder.append("  unavailable <room> <from> <to> <note>        - Mark a room as temporarily unavailable.\n");
+
+        return builder.toString();
     }
 }

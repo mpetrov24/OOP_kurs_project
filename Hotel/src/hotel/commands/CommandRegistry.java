@@ -14,6 +14,7 @@ public class CommandRegistry {
         register("availability", new AvailabilityCommand(context));
         register("checkout", new CheckoutCommand(context));
         register("report", new ReportCommand(context));
+        register("find", new FindCommand(context));
         register("unavailable", new UnavailableCommand(context));
         register("open", new OpenCommand(context));
         register("save", new SaveCommand(context));
@@ -27,7 +28,7 @@ public class CommandRegistry {
 
     public void executeCommand(String line) {
         String[] parts = line.trim().split("\\s+");
-        if (parts.length == 0) return;
+        if (line.isEmpty()) return;
 
         String cmd = parts[0].toLowerCase();
         Command command = commands.get(cmd);
