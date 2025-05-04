@@ -22,7 +22,7 @@ public class SaveAsCommand extends Command{
         try {
             HotelSaver.saveReservations(reservations.getAbsolutePath(), context.getHotel());
             HotelSaver.saveUnavailable(unavailable.getAbsolutePath(), context.getHotel());
-            System.out.println("Date saved successfully");
+            System.out.println("Data saved successfully");
         } catch (IOException e) {
             throw new CommandException("Failed to save hotel data " + e.getMessage());
         }

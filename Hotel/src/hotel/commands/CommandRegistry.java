@@ -19,6 +19,7 @@ public class CommandRegistry {
         register("open", new OpenCommand(context));
         register("save", new SaveCommand(context));
         register("saveas", new SaveAsCommand(context));
+        register("close", new CloseCommand(context));
         register("help", new HelpCommand(context));
     }
 
