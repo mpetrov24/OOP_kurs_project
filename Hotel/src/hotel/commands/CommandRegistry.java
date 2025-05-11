@@ -15,6 +15,7 @@ public class CommandRegistry {
         register("checkout", new CheckoutCommand(context));
         register("report", new ReportCommand(context));
         register("find", new FindCommand(context));
+        register("find!", new FindForceCommand(context));
         register("unavailable", new UnavailableCommand(context));
         register("open", new OpenCommand(context));
         register("save", new SaveCommand(context));
