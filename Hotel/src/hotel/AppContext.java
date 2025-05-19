@@ -6,11 +6,19 @@ public class AppContext {
     private final Hotel hotel;
     private File reservationFile;
     private File unavailableFile;
-
+    /**
+     * Конструктор на AppContext.
+     *
+     * @param hotel Обектът Hotel, който ще бъде част от контекста.
+     */
     public AppContext(Hotel hotel) {
         this.hotel = hotel;
     }
-
+    /**
+     * Връща обекта Hotel от контекста.
+     *
+     * @return Обектът Hotel.
+     */
     public Hotel getHotel() {
         return hotel;
     }

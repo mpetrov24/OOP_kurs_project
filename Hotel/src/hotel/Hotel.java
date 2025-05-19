@@ -14,7 +14,13 @@ public class Hotel {
     public List<Room> getRooms() {
         return Collections.unmodifiableList(rooms);
     }
-
+    /**
+     * Добавя нова стая към хотела.
+     * Проверява дали стая със същия номер вече съществува преди добавяне.
+     * Ако съществува, извежда съобщение и не добавя стаята.
+     *
+     * @param room Обектът Room, който ще бъде добавен.
+     */
     public void addRoom(Room room) {
         for (Room r : rooms) {
             if (r.getNumber() == room.getNumber()) {
@@ -24,7 +30,12 @@ public class Hotel {
         }
         rooms.add(room);
     }
-
+    /**
+     * Намира стая по зададен номер.
+     *
+     * @param roomNumber Номерът на стаята, която се търси.
+     * @return Обектът Room, ако е намерен, или null, ако не съществува стая с този номер.
+     */
     public Room findRoom(int roomNumber) {
         Room room = null;
         for (Room r: rooms) {

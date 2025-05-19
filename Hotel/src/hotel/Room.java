@@ -49,7 +49,15 @@ public class Room {
         }
         return true;
     }
-
+    /**
+     * Проверява дали стаята е налична за даден период.
+     * Стаята е налична, ако няма застъпващи се резервации или
+     * периоди на недостъпност в рамките на посочения период.
+     *
+     * @param dateFrom Начална дата на търсения период (включително).
+     * @param dateTo Крайна дата на търсения период (включително).
+     * @return true, ако стаята е налична за периода, false в противен случай.
+     */
     public boolean isAvailableOnDate(LocalDate dateFrom, LocalDate dateTo) {
         for (Reservation res : reservations) {
             if (res.isOverlapping(dateFrom, dateTo)) {

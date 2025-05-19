@@ -29,6 +29,8 @@ public class Main {
             System.err.println("Failed to load hotel data: " + e.getMessage());
         }
 
+        System.out.println("Type help to see all available commands");
+
         while (true) {
             System.out.print("> ");
             String input = sc.nextLine();

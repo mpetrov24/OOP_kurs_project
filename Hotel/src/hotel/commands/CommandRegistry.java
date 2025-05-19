@@ -6,9 +6,18 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Регистър за командите, поддържани от приложението.
+ * Отговаря за парсването на потребителския вход и делегирането на изпълнението
+ * към съответния обект Command.
+ */
 public class CommandRegistry {
     private final Map<String, Command> commands = new HashMap<>();
-
+    /**
+     * Конструктор, инициализира регистъра и регистрира всички стандартни команди.
+     *
+     * @param context Контекстът на приложението, който ще бъде подаден на командите.
+     */
     public CommandRegistry(AppContext context) {
         register("checkin", new CheckinCommand(context));
         register("availability", new AvailabilityCommand(context));
@@ -28,6 +37,13 @@ public class CommandRegistry {
         commands.put(name.toLowerCase(), command);
     }
 
+    /**
+     * Изпълнява команда въз основа на подадения текстов ред от потребителя.
+     * Парсва реда, намира командата в регистъра и извиква нейния execute метод.
+     * Обработва CommandException.
+     *
+     * @param line Целият ред, въведен от потребителя.
+     */
     public void executeCommand(String line) {
         String[] parts = line.trim().split("\\s+");
         if (line.isEmpty()) return;
